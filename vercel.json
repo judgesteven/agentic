@@ -23,5 +23,6 @@
     "api/index.py": {
       "maxDuration": 30
     }
-  }
+  },
+  "public": true
 } 
