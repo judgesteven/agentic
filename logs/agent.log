@@ -1,0 +1,15 @@
+2025-06-23 22:20:20,846 - AgenticAI - INFO - Agent 'AgenticAI' initialized successfully
+2025-06-23 22:20:20,847 - AgenticAI - INFO - Started new conversation: 4e458836-f3be-4aa1-a911-8ec748c16123
+2025-06-23 22:20:21,567 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2025-06-23 22:20:21,570 - AgenticAI - ERROR - Error processing message: Error code: 401 - {'error': {'message': 'Incorrect API key provided: your_ope************here. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-06-23 22:20:22,850 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2025-06-23 22:20:22,851 - AgenticAI - ERROR - Error processing message: Error code: 401 - {'error': {'message': 'Incorrect API key provided: your_ope************here. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-06-23 22:20:24,139 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2025-06-23 22:20:24,139 - AgenticAI - ERROR - Error processing message: Error code: 401 - {'error': {'message': 'Incorrect API key provided: your_ope************here. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-06-23 22:20:25,422 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2025-06-23 22:20:25,423 - AgenticAI - ERROR - Error processing message: Error code: 401 - {'error': {'message': 'Incorrect API key provided: your_ope************here. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-06-23 22:20:26,726 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2025-06-23 22:20:26,727 - AgenticAI - ERROR - Error processing message: Error code: 401 - {'error': {'message': 'Incorrect API key provided: your_ope************here. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+2025-06-23 22:20:27,729 - AgenticAI - INFO - Starting task: Create a simple text file with a greeting
+2025-06-23 22:20:31,234 - AgenticAI - INFO - Task completed: Create a simple text file with a greeting
+2025-06-23 22:20:31,236 - AgenticAI - INFO - Shutting down agent...
