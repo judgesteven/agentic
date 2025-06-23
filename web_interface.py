@@ -1,20 +1,14 @@
 #!/usr/bin/env python3
 """
 Mobile-friendly web interface for the agentic AI system.
-Vercel-compatible version without Socket.IO.
+Vercel-compatible version with minimal dependencies.
 """
 
-import asyncio
 import json
 import os
 from datetime import datetime
-from flask import Flask, render_template, request, jsonify, session
+from flask import Flask, render_template, request, jsonify
 import threading
-
-# Import our agent components
-from core.agent import Agent
-from core.config import AgentConfig
-
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'agentic-ai-secret-key-2024'
@@ -28,9 +22,7 @@ def initialize_agent():
     """Initialize the agent."""
     global agent
     try:
-        config = AgentConfig()
-        # For demo purposes, we'll create a mock agent that doesn't require API keys
-        agent = MockAgent(config)
+        agent = MockAgent()
         print("🤖 Agent initialized successfully")
     except Exception as e:
         print(f"❌ Error initializing agent: {e}")
@@ -38,21 +30,21 @@ def initialize_agent():
 
 
 class MockAgent:
-    """Mock agent for demo purposes without requiring API keys."""
+    """Mock agent for demo purposes without requiring heavy dependencies."""
     
-    def __init__(self, config):
-        self.config = config
+    def __init__(self):
+        self.agent_name = "Agentic AI Assistant"
         self.conversation_id = None
         self.memory = []
         self.tools = ["web_search", "file_operations", "code_execution"]
     
-    async def start_conversation(self):
+    def start_conversation(self):
         """Start a new conversation."""
         import uuid
         self.conversation_id = str(uuid.uuid4())
         return self.conversation_id
     
-    async def process_message(self, message: str, use_tools: bool = True):
+    def process_message(self, message: str, use_tools: bool = True):
         """Process a user message and return a response."""
         # Add to memory
         self.memory.append({
@@ -110,7 +102,7 @@ What would you like me to help you with?"""
         else:
             return "I understand you said: '" + message + "'. I'm here to help with various tasks including web searches, file operations, code execution, and task planning. What would you like me to assist you with?"
     
-    async def plan_task(self, goal: str):
+    def plan_task(self, goal: str):
         """Plan a task."""
         import uuid
         task_id = f"task_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
@@ -127,10 +119,11 @@ What would you like me to help you with?"""
             ]
         }
     
-    async def execute_task(self, task):
+    def execute_task(self, task):
         """Execute a task."""
         # Simulate task execution
-        await asyncio.sleep(2)
+        import time
+        time.sleep(2)
         
         return {
             "success": True,
@@ -141,7 +134,7 @@ What would you like me to help you with?"""
     def get_status(self):
         """Get agent status."""
         return {
-            "agent_name": self.config.agent_name,
+            "agent_name": self.agent_name,
             "conversation_id": self.conversation_id,
             "memory_size": len(self.memory),
             "available_tools": self.tools,
@@ -171,13 +164,7 @@ def chat():
             if agent is None:
                 return jsonify({'error': 'Agent not initialized'}), 500
             
-            # Run async function in sync context
-            loop = asyncio.new_event_loop()
-            asyncio.set_event_loop(loop)
-            try:
-                response = loop.run_until_complete(agent.process_message(message))
-            finally:
-                loop.close()
+            response = agent.process_message(message)
         
         return jsonify({
             'response': response,
@@ -212,14 +199,8 @@ def create_task():
             if agent is None:
                 return jsonify({'error': 'Agent not initialized'}), 500
             
-            # Run async functions in sync context
-            loop = asyncio.new_event_loop()
-            asyncio.set_event_loop(loop)
-            try:
-                task = loop.run_until_complete(agent.plan_task(goal))
-                result = loop.run_until_complete(agent.execute_task(task))
-            finally:
-                loop.close()
+            task = agent.plan_task(goal)
+            result = agent.execute_task(task)
         
         return jsonify({
             'task': task,
